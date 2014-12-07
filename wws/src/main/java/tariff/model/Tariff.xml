@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Tariff">
+	<typeAlias alias="TariffBean" type="tariff.model.TariffBean"/>
+	
+	<resultMap id="TariffResult" class="TariffBean">
+		<result property="tffIdx" column="tff_idx"/>
+		<result property="tariff" column="tariff"/>
+		<result property="tffPrice" column="tff_price"/>
+		<result property="tffId" column="tff_id"/>
+		<result property="discount" column="discount"/>
+		<result property="rgstDate" column="rgst_date"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="TariffResult" parameterClass="java.util.HashMap">
+		select * from tariff 
+		order by tff_idx desc
+		limit #pageStartIdx#, #pageSize#
+	</select>
+	<select id="count" resultClass="int">
+		select count(*) from tariff
+	</select>
+	
+	<insert id="insert" parameterClass="TariffBean">
+		insert into tariff(
+			
+			tariff,
+			tff_price,
+			tff_id,
+			discount,
+			)
+			values(
+			
+			#tariff#,
+			#tffPrice#,
+			#tffId#,
+			#discount#,
+			)
+	</insert>
+	<select id="selectByIdx" parameterClass="int" resultMap="TariffResult">
+		select * from tariff 
+		where tff_idx=#tffIdx#
+	</select>
+
+	<update id="update" parameterClass="TariffBean">
+		update tariff set
+			tariff=#tariff#,
+			tff_price=#tffPrice#,
+			tff_id=#tffId#,
+			discount=#discount#
+		where tff_idx=#tffIdx#
+	</update>
+	
+	<delete id="delete" parameterClass="int">
+		delete from tariff where tff_idx=#tffIdx#
+	</delete>
+</sqlMap>

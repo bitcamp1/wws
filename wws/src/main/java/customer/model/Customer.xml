@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Customer">
+	<typeAlias alias="CustomerBean" type="customer.model.CustomerBean"/>
+  
+	<resultMap id="CustomerResult" class="CustomerBean">
+		<result property="custIdx" column="cust_idx"/>
+		<result property="custId" column="cust_id"/>
+		<result property="customer" column="customer"/>
+		<result property="bizNo" column="biz_no"/>
+		<result property="phone" column="phone"/>
+		<result property="manager" column="manager"/>
+		<result property="mgrTel" column="mgr_tel"/>
+		<result property="mgrCel" column="mgr_cel"/>
+		<result property="mgrEmail" column="mgr_email"/>
+		<result property="partner" column="partner"/>
+		<result property="ptrTel" column="ptr_tel"/>
+		<result property="ptrCel" column="ptr_cel"/>
+		<result property="ptrEmail" column="ptr_email"/>
+		<result property="posting" column="posting"/>
+		<result property="rgstDate" column="rgst_date"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="CustomerResult" parameterClass="java.util.HashMap">
+		select 
+			*
+		 from customer 
+		order by cust_idx desc
+		limit #pageStartIdx#, #pageSize#
+	</select>
+	<select id="count" resultClass="int">
+		select count(*) from customer
+	</select>
+	
+	
+	<insert id="insert" parameterClass="CustomerBean">
+		insert into customer(
+			customer,
+			cust_id,
+			biz_no,
+			phone,
+			manager,
+			mgr_tel,
+			mgr_cel,
+			mgr_email,
+			partner,
+			ptr_tel,
+			ptr_cel,
+			ptr_email,
+			posting
+			)
+		values(
+			#customer#,
+			#custId#,
+			#bizNo#,
+			#phone#,
+			#manager#,
+			#mgrTel#,
+			#mgrCel#,
+			#mgrEmail#,
+			#partner#,
+			#ptrTel#,
+			#ptrCel#,
+			#ptrEmail#,
+			#posting#
+			)
+	</insert>
+	
+	<select id="selectByIdx" parameterClass="int" resultMap="CustomerResult">
+		select 
+			cust_idx,
+			cust_id,
+			customer,
+			biz_no,
+			phone,
+			manager,
+			mgr_tel,
+			mgr_cel,
+			mgr_email,
+			partner,
+			ptr_tel,
+			ptr_cel,
+			ptr_email,
+			posting,
+			
+			rgst_date
+		
+		
+		from customer 
+		where cust_idx=#custIdx#
+	</select>
+	<select id="selectById" parameterClass="java.lang.String" resultMap="CustomerResult">
+		
+		select 
+		
+			cust_idx,
+			cust_id,
+			customer,
+			biz_no,
+			phone,
+			manager,
+			mgr_tel,
+			mgr_cel,
+			mgr_email,
+			partner,
+			ptr_tel,
+			ptr_cel,
+			ptr_email,
+			posting,
+			rgst_date
+		
+		 from customer 
+		where cust_id=#custId#
+	</select>
+	<select id="selectByName" parameterClass="java.lang.String" resultMap="CustomerResult">
+		
+		select 
+			cust_idx,
+			cust_id,
+			customer,
+			biz_no,
+			phone,
+			manager,
+			mgr_tel,
+			mgr_cel,
+			mgr_email,
+			partner,
+			ptr_tel,
+			ptr_cel,
+			ptr_email,
+			posting,
+			rgst_date
+		
+		 from customer 
+		where customer=#customer#
+	</select>
+	<select id="checkDupl" parameterClass="java.lang.String" resultClass="int">
+		select count(*) from customer
+		where cust_id=#custId#
+		
+	</select>
+	
+	<update id="update" parameterClass="CustomerBean">
+		update customer set
+			customer=#customer#,
+			biz_no=#bizNo#,
+			phone=#phone#,
+			manager=#manager#,
+			mgr_tel=#mgrTel#,
+			mgr_cel=#mgrCel#,
+			mgr_email=#mgrEmail#,
+			partner=#partner#,
+			ptr_tel=#ptrTel#,
+			ptr_cel=#ptrCel#,
+			ptr_email=#ptrEmail#
+			
+			where cust_idx=#custIdx#
+	</update>
+	
+	<delete id="delete" parameterClass="int">
+		delete from customer 
+		where cust_idx=#custIdx#
+	</delete>
+	
+	
+	
+</sqlMap>

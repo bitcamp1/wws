@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Tgate">
+	<typeAlias alias="TgBean" type="tgate.model.TgateBean"/>
+	<typeAlias alias="CsBean" type="customer.model.CustomerBean"/>
+	<typeAlias alias="TfBean" type="tariff.model.TariffBean"/>
+	<typeAlias alias="CtBean" type="contract.model.ContractBean"/>
+	<typeAlias alias="MbBean" type="mobile.model.MobileBean"/>
+	
+	
+	<resultMap id="SelectAllResult" class="TgBean" >
+		<result property="tgIdx" column="tg_idx"/>
+		<result property="tgUrl" column="tg_url"/>
+		<result property="totalPrice" column="total_price"/>
+		<result property="custId" column="cust_id"/>
+		<result property="model" column="model"/>
+		<result property="joinType" column="join_type"/>
+		<result property="tffIdx" column="tff_idx"/>
+		<result property="tffId" column="tff_id"/>	
+		<result property="rgstDate" column="rgst_date"/>
+		<result property="csBean.customer" column="customer"/>
+		<result property="tfBean.tariff" column="tariff"/>
+		<result property="ctBean.joinNm" column="join_nm"/>
+	</resultMap>
+	<resultMap id="SelectByCustIdResult" class="TgBean">
+		<result property="mbBean.mobile" column="mobile"/>
+		<result property="mbBean.mImg" column="m_img"/>
+		<result property="mbBean.dImg" column="d_img"/>
+		<result property="mbBean.model" column="model"/>
+		<result property="csBean.customer" column="customer"/>
+		<result property="csBean.custId" column="cust_id"/>
+		<result property="mbBean.mbIdx" column="mb_idx"/>
+		<result property="mbBean.dtlUrl" column="dtl_url"/>
+	</resultMap>
+	<resultMap id="SelectByModelResult" class="TgBean">
+		<result property="tgIdx" column="tg_idx" />
+		<result property="tgUrl" column="tg_url" />
+		<result property="model" column="model" />
+		<result property="totalPrice" column="total_price" />
+		<result property="custId" column="cust_id" />
+		<result property="joinType" column="join_type" />
+		<result property="tffIdx" column="tff_idx" />
+		<result property="tffId" column="tff_id" />
+		<result property="csBean.customer" column="customer"/>
+		<result property="ctBean.iMonth" column="i_month"/>
+		<result property="ctBean.joinNm" column="join_nm"/>
+		<result property="mbBean.mobile" column="mobile" />
+		<result property="mbBean.mImg" column="m_img" />
+		<result property="mbBean.dImg" column="d_img" />
+		<result property="mbBean.dtlUrl" column="dtl_url" />
+		<result property="mbBean.mbPrice" column="mb_price" />
+		<result property="tfBean.tffPrice" column="tff_price" />
+		<result property="tfBean.discount" column="discount" />
+		<result property="tfBean.tariff" column="tariff" />
+	</resultMap>
+	<resultMap id="SelectByJoinTypeResult" class="TgBean">
+		<result property="tgIdx" column="tg_idx" />
+		<result property="tgUrl" column="tg_url" />
+		<result property="model" column="model" />
+		<result property="totalPrice" column="total_price" />
+		<result property="custId" column="cust_id" />
+		<result property="joinType" column="join_type" />
+		<result property="tffId" column="tff_id" />
+		<result property="tffIdx" column="tff_idx" />
+		<result property="csBean.customer" column="customer"/>
+		<result property="ctBean.iMonth" column="i_month"/>
+		<result property="ctBean.joinNm" column="join_nm"/>
+		<result property="mbBean.mobile" column="mobile" />
+		<result property="mbBean.mImg" column="m_img" />
+		<result property="mbBean.dImg" column="d_img" />
+		<result property="mbBean.dtlUrl" column="dtl_url" />
+		<result property="mbBean.mbPrice" column="mb_price" />
+		<result property="tfBean.tffPrice" column="tff_price" />
+		<result property="tfBean.discount" column="discount" />
+		<result property="tfBean.tariff" column="tariff" />
+	</resultMap>
+	
+	<insert id="insert" parameterClass="TgBean">
+		insert into tgate 
+     (
+          tg_url,
+          cust_id,
+          model,
+          join_type,
+          tff_idx,
+          total_price
+     )
+     values
+     (
+          #tgUrl#,
+          #custId#,
+          #model#,
+          #joinType#,
+          #tffIdx#,
+          #totalPrice#
+     
+     );   
+	</insert>
+	<select id="selectAll"    parameterClass="java.util.HashMap" resultMap="SelectAllResult">
+		select 
+			tg.tg_idx,
+			tg.tg_url,
+			tg.cust_id,
+			tg.model,
+			tg.join_type,
+			tg.rgst_date,
+			tg.tff_idx,
+			tg.total_price,
+			tg.tff_id,
+			cs.customer,
+			tf.tariff,
+			ct.join_nm
+		from 
+			tgate tg,
+			customer cs,
+			tariff tf,
+			contract ct
+		where
+			tg.cust_id=cs.cust_id
+			and tg.tff_id=tf.tff_id
+			and tg.join_type=ct.join_type
+		order by tg_idx desc
+		
+		limit #pageStartIdx#, #pageSize#
+	</select>
+	<select id="count" resultClass="int">
+		select count(*) from tgate
+	</select>
+	<select id="selectByIdx" parameterClass="int" resultMap="SelectAllResult">
+		select 
+			tg.tg_idx,
+			tg.tg_url,
+			tg.cust_id,
+			tg.model,
+			tg.join_type,
+			tg.rgst_date,
+			tg.tff_idx,
+			tg.total_price,
+			tg.tff_id,
+			cs.customer,
+			tf.tariff,
+			ct.join_nm
+		from 
+			tgate tg,
+			customer cs,
+			tariff tf,
+			contract ct
+		
+		where 
+		 tg_idx = #tgIdx#
+		 and tg.cust_id=cs.cust_id
+		 and tg.tff_id=tf.tff_id
+		 and tg.join_type=ct.join_type
+	</select>
+	<select id="selectByCustId" parameterClass="java.lang.String" resultMap="SelectByCustIdResult">
+		select distinct
+			mb.mobile,
+			mb.m_img,
+			mb.d_img,
+			mb.model,
+			cs.customer,
+			cs.cust_id,
+			mb.mb_idx,
+			mb.dtl_url
+		from 
+			mobile mb,
+			customer cs,
+			tgate tg
+		where
+			tg.model = mb.model and
+		 	tg.cust_id=cs.cust_id and
+ 			cs.cust_id=#cust_id#
+		order by mb_idx desc
+	</select>
+	<select id="selectByModel" parameterClass="java.util.HashMap" resultMap="SelectByModelResult">
+		select
+			tg.tg_idx,
+			tg.tg_url,
+			tg.model,
+			tg.total_price,
+			tg.cust_id,
+			tg.join_type,
+			tg.tff_idx,
+			cs.customer,
+			ct.i_month,
+			ct.join_nm,
+			mb.mobile,
+			mb.m_img,
+			mb.d_img,
+			mb.dtl_url,
+			mb.mb_price,
+			tg.tff_id,
+			tf.tff_price,
+			tf.discount,
+			tf.tariff
+		from
+			tgate tg,
+			customer cs,
+			mobile mb,
+			contract ct,
+			tariff tf
+		where
+			tg.cust_id=cs.cust_id
+			and tg.model=mb.model
+			and ct.join_type=tg.join_type
+			and tf.tff_idx=tg.tff_idx
+			and tg.cust_id=#custId#
+			and tg.model=#model#
+			and tf.tff_id=#tffId#
+			and tg.join_type=#joinType#
+			
+	</select>
+	<select id="selectByJoinType" parameterClass="java.util.HashMap" resultMap="SelectByJoinTypeResult">
+		select 
+			tg.tg_idx,
+			tg.tg_url,
+			tg.model,
+			tg.total_price,
+			tg.cust_id,
+			tg.join_type,
+			tg.tff_idx,
+			cs.customer,
+			ct.i_month,
+			ct.join_nm,
+			mb.mobile,
+			mb.m_img,
+			mb.d_img,
+			mb.dtl_url,
+			mb.mb_price,
+			tf.tff_id,
+			tf.tff_price,
+			tf.discount,
+			tf.tariff
+			
+		from
+			tgate tg,
+			customer cs,
+			mobile mb,
+			contract ct,
+			tariff tf
+		
+		where
+			tg.cust_id=cs.cust_id
+			and tg.model=mb.model
+			and ct.join_type=tg.join_type
+			and tf.tff_idx=tg.tff_idx
+			and tg.cust_id=#custId#
+			and tg.model=#model#
+			and tf.tff_id=#tffId#
+			and tg.join_type=#joinType#
+		
+	</select>
+	<update id="update" parameterClass="TgBean">
+		update 
+			tgate set
+			tg_url=#tgUrl#
+		
+		where tg_idx=#tgIdx#
+	</update>
+	
+	
+	
+	<delete id="delete" parameterClass="int">
+		delete from tgate where tg_idx=#tgIdx#
+	</delete>
+	
+	
+</sqlMap> 

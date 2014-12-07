@@ -1,0 +1,100 @@
+@CHARSET "utf-8";
+
+
+@import url{'demo.css'};
+
+/* Reset */
+html,body{width:100%;height:100%}
+html{overflow-y:scroll}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,form,fieldset,p,button{margin:0;padding:0}
+body,h1,h2,h3,h4,input,button{font-family:'돋움',dotum,Helvetica,sans-serif;font-size:12px;color:#383d41}
+body{background-color:#fff;text-align:center;*word-break:break-all;-ms-word-break:break-all}
+img,iframe{border:0 none}
+li{list-style:none}
+input,select,button{vertical-align:middle}
+img{vertical-align:top}
+i,em,address{font-style:normal}
+label,button{cursor:pointer}
+button{margin:0;padding:0;border:0;}
+a{color:#2f3743;text-decoration:none}
+a:hover{color:#390;text-decoration:none}
+a:hover{color:#390;text-decoration:none}
+button *{position:relative}
+button img{left:-3px;*left:auto}
+html:first-child select{height:20px;padding-right:6px}
+option{padding-right:6px}
+hr{display:none}
+legend{*width:0}
+table{/* border-collapse:collapse;table-layout:fixed; */border-collapse:collapse;border-spacing:0}
+ul{
+	display: block;
+-webkit-margin-before: 0;
+-webkit-margin-after: 0;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+-webkit-padding-start: 0;
+	
+}
+body {
+        font-size: 10pt;
+    }
+table td,
+table th { font-size:11px;}
+
+#wrap_admin{
+	margin : 0 auto;
+		width : 100%;
+	font-size: 11px;
+	overflow: hidden;
+		
+}
+.btn{background-color:#003399;cursor : pointer;color:#fff;width:100px;height:40px;}
+	
+	
+
+.tab_no{width : 80px;}
+.tab_col{width : 200px;}
+
+.table_style {font-size: 12px;text-align:center;}
+	
+
+
+.table_style th {
+	color : #fff;
+	background : #04BF00;
+	padding : 5px;
+	font-size : 12px;
+	
+}
+.table_style td{border : 1px solid gray;text-align: center;}
+
+.input_style {width:90%;}
+    
+
+
+.open_video{color:#000; font:bold 1.3em Arial, helvetiaca, sans-serif;}
+ .video{  position:absolute; left:50%; top:50%;
+ background-color : white;
+  margin-left:-290px; margin-top:-160px; z-index:1 ; display:none;
+  border:20px solid #fff; border-radius:5px; -moz-border-radius:5px; -o-border-radius:5px;
+   -webkit-border-radius:5px;
+  }
+ .close{width:50px; height:50px; position:absolute;  top:-10px;right:-10px; color:#FFF;z-index:2;}
+ .shadow{width:100%; min-height:100%; background:#000; position:absolute; left:0px; top:0px;
+  z-index:0; display:none;
+ }
+ 
+
+
+/* Basic jQuery Slider essential styles */
+
+#admin_table{width:1200px;float:left;}
+#admin_table td:first{text-align:right; border:#fff;font-size: 11px;}
+#admin_container{width:1200px;margin:0 auto;}
+#srchbox{float:right; margin:5px 20px 0 0;}
+
+
+
+
+
+

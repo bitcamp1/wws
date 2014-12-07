@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Admin">
+	<typeAlias alias="AdminBean" type="admin.model.AdminBean"/>
+  
+	<resultMap id="AdminResult" class="AdminBean">
+		<result property="admIdx" column="adm_idx"/>
+		<result property="name" column="name"/>
+		<result property="id" column="id"/>
+		<result property="pwd" column="pwd"/>
+		<result property="phone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="auth" column="auth"/>
+		<result property="rgstDate" column="rgst_date"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="AdminResult" parameterClass="java.util.HashMap">
+		select * from admin 
+		order by adm_idx desc
+		limit #pageStartIdx#, #pageSize#
+	</select>
+	<select id="count" resultClass="int">
+		select count(*) from admin
+	</select>
+	<insert id="insert" parameterClass="AdminBean">
+		insert into admin(
+			
+			id,
+			pwd,
+			name,
+			phone,
+			email,
+			auth
+		
+			
+		)values(
+			
+			#id#,
+			#pwd#,
+			#name#,
+			#phone#,
+			#email#,
+			#auth#
+		)
+			
+	</insert>
+	
+	<select id="selectByIdx" resultMap="AdminResult" parameterClass="int">
+		select 
+			adm_idx, 
+			name,
+			id, 
+			pwd, 
+			phone, 
+			email, 
+			auth,
+			rgst_date 
+		from admin 
+		where adm_idx=#admIdx#
+	</select>
+	<select id="selectById" parameterClass="java.lang.String" resultMap="AdminResult">
+		select * from admin where id=#id#
+	</select>
+	
+	<select id="selectByName" parameterClass="java.lang.String" resultClass="java.util.HashMap">
+		select * from admin where name=#name#
+	</select>
+	<select id="login" parameterClass="java.util.HashMap" resultMap="AdminResult">
+		select * from admin where id=#id# and pwd=#pwd#
+	</select>
+	<update id="update" parameterClass="AdminBean">
+		update admin set
+			
+			pwd=#pwd#,
+			auth=#auth#,
+			phone=#phone#,
+			email=#email#
+			
+			where adm_idx=#admIdx#
+			
+	</update>
+	<delete id="delete" parameterClass="int" >
+		delete from admin where adm_idx=#admIdx#
+	</delete>
+
+</sqlMap>

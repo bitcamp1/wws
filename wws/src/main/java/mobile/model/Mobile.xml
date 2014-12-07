@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Mobile">
+	<typeAlias alias="MobileBean" type="mobile.model.MobileBean"/>
+	
+	<resultMap id="MobileResult" class="MobileBean">
+		<result property="mbIdx" column="mb_idx"/>
+		<result property="company" column="company"/>
+		<result property="mobile" column="mobile"/>
+		<result property="model" column="model"/>
+		<result property="mbPrice" column="mb_price"/>
+		<result property="mainImgIdx" column="main_img_idx"/>
+		<result property="dtlImgIdx" column="dtl_img_idx"/>
+		<result property="rgstDate" column="rgst_date"/>
+		<result property="mImg" column="m_img"/>
+		<result property="dImg" column="d_img"/>
+		<result property="dtlUrl" column="dtl_url"/>
+		<result property="custId" column="cust_id"/>
+	</resultMap>
+	
+	
+	<insert id="insert" parameterClass="MobileBean">
+		insert into mobile(
+			company,
+			mobile,
+			model,
+			mb_price,
+			main_img_idx,
+			dtl_img_idx,
+			m_img,
+			d_img,
+			dtl_url,
+			cust_id
+			)
+		values(
+			#company#,
+			#mobile#,
+			#model#,
+			#mbPrice#,
+			#mainImgIdx#,
+			#dtlImgIdx#,
+			#mImg#,
+			#dImg#,
+			#dtlUrl#,
+			#custId#
+			)
+	</insert>
+	<select id="selectByIdx" parameterClass="int" resultMap="MobileResult">
+		select * from mobile 
+		where mb_idx=#mbIdx#
+	</select>
+	<select id="selectByCompany" parameterClass="java.lang.String" resultMap="MobileResult">
+		select * from mobile
+		order by mb_idx
+		where company=#company#
+	</select>
+	<select id="selectMaxIdx" parameterClass="int" resultClass="int">
+		select max(mb_idx) as mbIdx from mobile
+	</select>
+	<select id="checkDupl" parameterClass="java.lang.String" resultClass="int">
+		select count(*) from mobile 
+		where model=#model#
+	</select>
+	<select id="selectAll" resultMap="MobileResult" parameterClass="java.util.HashMap">
+		select * from mobile 
+		order by mb_idx desc
+		limit #pageStartIdx#, #pageSize#
+	</select>
+	<select id="count" resultClass="int">
+		select count(*) from mobile;
+	</select>
+	<select id="selectLastInsertId" resultClass="int">
+		select last_insert_id() from mobile
+	</select>
+	<update id="update" parameterClass="MobileBean">
+		update mobile set
+			company=#company#,
+			mobile=#mobile#,
+			model=#model#,
+			mb_price=#mbPrice#,
+			main_img_idx=#mainImgIdx#,
+			dtl_img_idx=#dtlImgIdx#,
+			m_img=#mImg#,
+			d_img=#dImg#
+			
+			
+			where mb_idx=#mbIdx#
+	</update>
+	<update id="updateMainImage" parameterClass="HashMap">
+		update mobile set main_img_idx=#mainImgIdx#
+		where mb_idx=#mbIdx#
+	</update>
+	
+	<update id="updateDetailImage" parameterClass="HashMap">
+		update mobile set dtl_img_idx=#dtlImgIdx#
+		where mb_idx=#mbIdx#
+	</update>
+	<delete id="delete" parameterClass="int">
+		delete from mobile where mb_idx=#mbIdx#
+	</delete>
+	
+	
+</sqlMap>

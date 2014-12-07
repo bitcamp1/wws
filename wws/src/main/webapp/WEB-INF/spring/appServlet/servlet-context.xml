@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:tx="http://www.springframework.org/schema/tx"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:mvc="http://www.springframework.org/schema/mvc"
+ xmlns:p="http://www.springframework.org/schema/p"
+ xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+  http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+ 
+ <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+ 
+ <!-- Enables the Spring MVC @Controller programming model -->
+ <tx:annotation-driven transaction-manager="txManager"/>
+ <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+ <mvc:resources mapping="/js/**" location="/resources/js/" />
+ <mvc:resources mapping="/css/**" location="/resources/css/"/>
+ <mvc:resources mapping="/img/**" location="/resources/img"/>
+ 
+ <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+ <bean p:order="2" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  <property name="prefix" value="/WEB-INF/views/" />
+  <property name="suffix" value=".jsp" />
+ </bean>
+ <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+  p:driverClassName="com.mysql.jdbc.Driver"
+  p:url="jdbc:mysql://localhost/whitews?zeroDateTimeBehavior=convertToNull"
+  p:username="whitews"
+  p:password="wwss+1016"
+ />
+  
+ <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+  <property name="dataSource" ref ="dataSource"/>
+  <property name="configLocation" value="classpath:/SqlMapConfig.xml"/>
+ </bean>
+ <bean id="simpleUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+  <property name="mappings">
+   <props>
+    <prop key="/admin/main.do">admin_mainController</prop>
+    <prop key="/admin/list.do">admin_listController</prop>
+    <prop key="/admin/registform.do">admin_registFormController</prop>
+    <prop key="/admin/regist.do">admin_registController</prop>
+    <prop key="/admin/detail.do">admin_detailController</prop>
+    <prop key="/admin/search.do">admin_searchController</prop>
+    <prop key="/admin/edit.do">admin_editController</prop>
+    <prop key="/admin/delete.do">admin_deleteController</prop>
+ 	<prop key="/admin/loginform.do">admin_loginFormController</prop>
+ 	<prop key="/admin/login.do">admin_loginController</prop>
+ 	<prop key="/admin/logout.do">admin_logout_controller</prop>
+    <prop key="/biz/main.do">biz_main_controller</prop>
+    <prop key="/biz/detailJoinType.do">biz_detailJointypeController</prop>
+    <prop key="/biz/detailModel.do">biz_detailModelController</prop>
+    <prop key="/biz/detailTariff.do">biz_detailTariffController</prop>
+    <prop key="/cel/main.do">cel_main_controller</prop>
+    <prop key="/contract/list.do">contract_listController</prop>
+    <prop key="/contract/registform.do">contract_registFormController</prop>
+    <prop key="/contract/regist.do">contract_registController</prop>
+    <prop key="/contract/detail.do">contract_detailController</prop>
+    <prop key="/contract/edit.do">contract_editController</prop>
+    <prop key="/contract/delete.do">contract_deleteController</prop>
+    <prop key="/customer/list.do">customer_listController</prop>
+    <prop key="/customer/registform.do">customer_registFormController</prop>
+    <prop key="/customer/regist.do">customer_registController</prop>
+    <prop key="/customer/detail.do">customer_detailController</prop>
+    <prop key="/customer/edit.do">customer_editController</prop>
+    <prop key="/customer/search.do">customer_searchController </prop>
+    <prop key="/customer/delete.do">customer_deleteController</prop>
+    <prop key="/dtg/adm_main.do">dtg_adm_main_controller</prop>
+    <prop key="/dtg/event.do">dtg_event_controller</prop>
+    <prop key="/dtg/mem_list.do">dtg_mem_list_controller</prop>
+    <prop key="/dtg/mem_regi.do">dtg_mem_regi_controller</prop>
+    <prop key="/dtg/noti_list.do">dtg_noti_list_controller</prop>
+    <prop key="/dtg/noti_regi.do">dtg_noti_regi_controller</prop>
+    <prop key="/dtg/oper_find_id.do">dtg_oper_find_id_controller</prop>
+    <prop key="/dtg/oper_join.do">dtg_oper_join_controller</prop>
+    <prop key="/dtg/oper_list.do">dtg_oper_list_controller</prop>
+    <prop key="/dtg/oper_login.do">dtg_oper_login_controller</prop>
+    <prop key="/dtg/oper_login_form.do">dtg_oper_login_form_controller</prop>
+    <prop key="/dtg/oper_logout.do">dtg_oper_logout_controller</prop>
+    <prop key="/dtg/oper_main.do">dtg_oper_main_controller</prop>
+    <prop key="/dtg/oper_regi.do">dtg_oper_regi_controller</prop>
+    <prop key="/dtg/oper_reset_pass.do">dtg_oper_reset_pass_controller</prop>
+    <prop key="/file/registform.do">file_registFormController</prop>
+    <prop key="/file/regist.do">file_registController</prop>
+    <prop key="/guest/list.do">guest_listController</prop>
+    <prop key="/guest/registform.do">guest_registFormController</prop>
+    <prop key="/guest/regist.do">guest_registController</prop>
+    <prop key="/guest/detail.do">guest_detailController</prop>
+    <prop key="/guest/edit.do">guest_editController</prop>
+    <prop key="/guest/search.do">guest_searchController</prop>
+    <prop key="/guest/delete.do">guest_deleteController</prop>
+    <prop key="/home/home.do">home_homeController</prop> <!-- 메인화면 귀환 -->
+    <prop key="/home/about_us.do">home_about_us_controller</prop> <!-- 회사소개 -->
+    <prop key="/home/load_content.do">home_load_contentController</prop>
+    <prop key="/home/jido.do">home_jidoController</prop>
+    <prop key="/home/logis.do">home_logis_controller</prop>
+    <prop key="/home/mobile_logis.do">home_mobile_logis_controller</prop>
+    <prop key="/home/dtg_main.do">home_dtg_main_controller</prop> <!-- dtg 메인가기 -->
+    <prop key="/home/sktelecom.do">home_sktelecom_controller</prop>  <!-- SKT대리점 -->
+    <prop key="/home/main_result.do">home_main_result_controller</prop> <!-- 주요실적 -->
+    <prop key="/home/customer_center.do">home_customer_center_controller</prop> <!-- 주요실적 -->
+    <prop key="/home/notice.do">home_notice_controller</prop> <!-- 공지사항 -->
+    <prop key="/home/partner.do">home_partner_controller</prop> <!-- 공지사항&& 파트너십 -->
+	<prop key="/mall/mall.do">mallController</prop>
+    <prop key="/mobile/list.do">mobile_listController</prop>
+    <prop key="/mobile/registform.do">mobile_registFormController</prop>
+    <prop key="/mobile/regist.do">mobile_registController</prop>
+    <prop key="/mobile/detail.do">mobile_detailController</prop>
+    <prop key="/mobile/edit.do">mobile_editController</prop>
+    <prop key="/mobile/search.do">mobile_searchController</prop>
+    <prop key="/mobile/delete.do">mobile_deleteController</prop>
+    <prop key="/promotion/list.do">promotion_listController</prop>
+    <prop key="/promotion/registform.do">promotion_registFormController</prop>
+    <prop key="/promotion/regist.do">promotion_registController</prop>
+    <prop key="/promotion/search.do">promotion_searchController</prop>
+    <prop key="/promotion/detail.do">promotion_detailController</prop>
+    <prop key="/promotion/edit.do">promotion_editController</prop>
+    <prop key="/promotion/delete.do">promotion_deleteController</prop>
+    <prop key="/tariff/list.do">tariff_listController</prop>
+    <prop key="/tariff/registform.do">tariff_registFormController</prop>
+    <prop key="/tariff/regist.do">tariff_registController</prop>
+    <prop key="/tariff/detail.do">tariff_detailController</prop>
+    <prop key="/tariff/edit.do">tariff_editController</prop>
+    <prop key="/tariff/search.do">tariff_searchController</prop>
+    <prop key="/tariff/delete.do">tariff_deleteController</prop>
+    <prop key="/tgate/list.do">tgate_listController</prop>
+    <prop key="/tgate/registform.do">tgate_registFormController</prop>
+    <prop key="/tgate/regist.do">tgate_registController</prop>
+    <prop key="/tgate/detail.do">tgate_detailController</prop>
+    <prop key="/tgate/edit.do">tgate_editController</prop>
+    <prop key="/tgate/delete.do">tgate_deleteController</prop>
+<!-- 비즈몰 바로가기  -->
+	<prop key="/asiana.do">asiana_controller</prop>
+	<prop key="/dongwon.do">dongwon_controller</prop>
+	<prop key="/gsretail.do">gsretail_controller</prop>
+	<prop key="/hm.do">hm_controller</prop>
+	<prop key="/hyundai-autoever.do">hyundai_autoever_controller</prop>
+	<prop key="/kkpc.do">kkpc_controller</prop>
+	<prop key="/lotte.do">lotte_controller</prop>
+	<prop key="/shinhandata.do">shinhandata_controller</prop>
+	<prop key="/youlchon.do">youlchon_controller</prop>
+   </props></property></bean>
+<bean id="admin_mainController" 		class="org.springframework.web.servlet.mvc.ParameterizableViewController"> <property name="viewName" value="admin/main"/></bean>
+<bean id="admin_listController" 		class="admin.controller.ListController"><property name="service"><ref bean="adminService"/></property></bean>
+<bean id="admin_registFormController" 	class="org.springframework.web.servlet.mvc.ParameterizableViewController"> <property name="viewName" value="admin/regist"/></bean>
+<bean id="admin_registController" 		class="admin.controller.RegistController"><property name="service"> <ref bean="adminService"/></property></bean>
+<bean id="admin_detailController" 		class="admin.controller.DetailController"><property name="service"><ref bean="adminService"/></property></bean>
+<bean id="admin_editController" 		class="admin.controller.EditController"><property name="service"><ref bean="adminService"/></property></bean>
+<bean id="admin_searchController" 		class="admin.controller.SearchController"><property name="service"><ref bean="adminService"/></property></bean>
+<bean id="admin_deleteController" 		class="admin.controller.DeleteController"><property name="service"> <ref bean="adminService"/></property></bean>
+<bean id="admin_loginController" 		class="admin.controller.LoginController"><property name="service"><ref bean="adminService"/></property></bean>
+<bean id="admin_logout_controller" 	class="admin.controller.LogoutController"><property name="service"><ref bean="adminService"/></property></bean>
+<bean id="admin_loginFormController" 	class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="admin/login"/></bean>
+<bean id="biz_detailJointypeController" class="biz.controller.DetailJointypeController"><property name="service"><ref bean="tgateService"/></property></bean>
+<bean id="biz_main_controller" 		class="biz.controller.MainController"><property name="service"><ref bean="tgateService"/></property></bean>
+<bean id="biz_detailModelController" 	class="biz.controller.DetailModelController"><property name="service"><ref bean="tgateService"/></property></bean>
+<bean id="biz_detailTariffController" 	class="biz.controller.DetailTariffController"><property name="service"><ref bean="tgateService"/></property></bean>
+<bean id="cel_main_controller" 		class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="celphone/main"/></bean>
+<bean id="contract_listController" 		class="contract.controller.ListController"><property name="service"><ref bean="contractService"/></property></bean>
+<bean id="contract_registFormController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="contract/regist"/></bean>
+<bean id="contract_registController" 	class="contract.controller.RegistController"><property name="service"><ref bean="contractService"/></property></bean>
+<bean id="contract_detailController" 	class="contract.controller.DetailController"><property name="service"><ref bean="contractService"/></property></bean>
+<bean id="contract_editController" 		class="contract.controller.EditController"><property name="service"><ref bean="contractService"/></property></bean>
+<bean id="contract_deleteController" 	class="contract.controller.DeleteController"><property name="service"><ref bean="contractService"/></property></bean>
+<bean id="customer_listController" 		class="customer.controller.ListController"><property name="service"><ref bean="customerService"/></property></bean>
+<bean id="customer_registFormController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="customer/regist"/></bean>
+<bean id="customer_registController" 	class="customer.controller.RegistController"><property name="service"><ref bean="customerService"/></property></bean>
+<bean id="customer_detailController" 	class="customer.controller.DetailController"><property name="service"><ref bean="customerService"/></property></bean>
+<bean id="customer_editController" 	class="customer.controller.EditController"><property name="service"><ref bean="customerService"/></property></bean>
+<bean id="customer_searchController" 	class="customer.controller.SearchController"><property name="service"><ref bean="customerService"/> </property></bean>
+<bean id="customer_deleteController" 	class="customer.controller.DeleteController"><property name="service"><ref bean="customerService"/></property></bean>
+<bean id="dtg_adm_main_controller" 	class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/adm_main"/></bean>
+<bean id="dtg_event_controller" 		class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/event"/></bean>
+<bean id="dtg_mem_list_controller" 		class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/mem_list"/> </bean>
+<bean id="dtg_mem_regi_controller" 		class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/mem_regi"/> </bean>
+<bean id="dtg_noti_list_controller" 	class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/noti_list"/></bean>
+<bean id="dtg_noti_regi_controller" 	class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/noti_regi"/></bean>
+<bean id="dtg_oper_find_id_controller" 		class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/oper_find_id"/></bean>
+<bean id="dtg_oper_join_controller" 			class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/oper_join"/></bean>
+<bean id="dtg_oper_list_controller" 	class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/oper_list"/></bean>
+<bean id="dtg_oper_login_controller" 		class="dtg.controller.LoginController"><property name="service"><ref bean="agencyService"/></property> </bean>
+<bean id="dtg_oper_login_form_controller" 	class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/oper_login_form"/></bean>
+<bean id="dtg_oper_logout_controller" 		class="dtg.controller.LogoutController"><property name="service"><ref bean="agencyService"/></property> </bean>
+<bean id="dtg_oper_main_controller" 	class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/oper_main"/></bean>
+<bean id="dtg_oper_regi_controller" 	class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/oper_regi"/></bean>
+<bean id="dtg_oper_reset_pass_controller" 		class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/oper_reset_pass"/></bean>
+
+  	
+<bean id="guest_listController" class="guest.controller.ListController"><property name="service"><ref bean="guestService"/></property></bean>
+<bean id="guest_registFormController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="guest/regist"/></bean>
+<bean id="guest_registController" class="guest.controller.RegistController"><property name="service"><ref bean="guestService"/></property></bean>
+<bean id="guest_searchController" class="guest.controller.SearchController"><property name="service"><ref bean="guestService"/> </property></bean>
+<bean id="guest_detailController" class="guest.controller.DetailController"><property name="service"> <ref bean="guestService"/></property> </bean>
+<bean id="guest_editController" class="guest.controller.EditController"><property name="service"><ref bean="guestService"/></property></bean>
+<bean id="guest_deleteController" class="guest.controller.DeleteController"> <property name="service"><ref bean="guestService"/> </property></bean>
+<bean id="home_partner_controller" 			class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="home/partner"/></bean>
+<bean id="home_customer_center_controller" 	class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="home/customer_center"/></bean>
+<bean id="home_about_us_controller" 		class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="home/about_us"/></bean>
+<bean id="home_homeController" 				class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="home/home"/></bean>
+<bean id="home_load_contentController" 		class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="home/content"/></bean>
+<bean id="home_jidoController" 				class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="home/jido"/></bean>
+<bean id="home_logis_controller" 			class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="home/logis"/></bean>
+<bean id="home_mobile_logis_controller" 	class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="home/mobile_logis"/></bean>
+<bean id="home_dtg_main_controller" 		class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="dtg/main"/></bean>
+<bean id="home_sktelecom_controller" 		class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="home/sktelecom"/></bean>
+<bean id="home_main_result_controller" 		class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="home/main_result"/></bean>
+<bean id="home_notice_controller" class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="home/notice"/></bean>
+<bean id="mobile_listController" class="mobile.controller.ListController"><property name="service"><ref bean="mobileService"/></property> </bean>
+<bean id="mallController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="mall/mall"/> </bean>
+ <bean id="mobile_registFormController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="mobile/regist"/></bean>
+ <bean id="mobile_registController" class="mobile.controller.RegistController"><property name="service"> <ref bean="mobileService"/> </property></bean>
+ <bean id="mobile_detailController" class="mobile.controller.DetailController"> <property name="service"><ref bean="mobileService"/> </property></bean>
+ <bean id="mobile_editController" class="mobile.controller.EditController"><property name="service"><ref bean="mobileService"/></property></bean>
+ <bean id="mobile_searchController" class="mobile.controller.SearchController"><property name="service"><ref bean="mobileService"/></property></bean>
+ <bean id="mobile_deleteController" class="mobile.controller.DeleteController"><property name="service"><ref bean="mobileService"/> </property></bean>
+ <bean id="promotion_listController" class="promotion.controller.ListController"><property name="service"><ref bean="promotionService"/></property></bean>
+ <bean id="promotion_registFormController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="promotion/regist"/></bean>
+ <bean id="promotion_registController" class="promotion.controller.RegistController"><property name="service"><ref bean="promotionService"/></property> </bean>
+ <bean id="promotion_searchController" class="promotion.controller.SearchController"><property name="service"><ref bean="promotionService"/></property></bean>
+ <bean id="promotion_detailController" class="promotion.controller.DetailController"><property name="service"><ref bean="promotionService"/></property> </bean>
+ <bean id="promotion_editController" class="promotion.controller.EditController"><property name="service"><ref bean="promotionService"/></property></bean>
+ <bean id="promotion_deleteController" class="promotion.controller.DeleteController"><property name="service"><ref bean="promotionService"/></property></bean>
+ <bean id="tariff_listController" class="tariff.controller.ListController"><property name="service"><ref bean="tariffService"/></property></bean>
+ <bean id="tariff_registFormController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="tariff/regist"/></bean>
+ <bean id="tariff_registController" class="tariff.controller.RegistController"><property name="service"> <ref bean="tariffService"/></property></bean>
+ <bean id="tariff_detailController" class="tariff.controller.DetailController"><property name="service"><ref bean="tariffService"/></property></bean>
+ <bean id="tariff_editController" class="tariff.controller.EditController"><property name="service"><ref bean="tariffService"/></property></bean>
+ <bean id="tariff_searchController" class="tariff.controller.SearchController"><property name="service"><ref bean="tariffService"/></property></bean>
+ <bean id="tariff_deleteController" class="tariff.controller.DeleteController"><property name="service"><ref bean="tariffService"/></property></bean>
+ <bean id="tgate_listController" class="tgate.controller.ListController"><property name="service"><ref bean="tgateService"/></property></bean>
+ <bean id="tgate_registFormController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="tgate/regist"/></bean>
+ <bean id="tgate_registController" class="tgate.controller.RegistController"><property name="service"><ref bean="tgateService"/></property></bean>
+ <bean id="tgate_detailController" class="tgate.controller.DetailController"><property name="service"><ref bean="tgateService"/></property></bean>
+ <bean id="tgate_editController" class="tgate.controller.EditController"><property name="service"><ref bean="tgateService"/></property></bean>
+ <bean id="tgate_deleteController" class="tgate.controller.DeleteController"><property name="service"><ref bean="tgateService"/> </property></bean>
+ <bean id="file_registFormController" class="org.springframework.web.servlet.mvc.ParameterizableViewController"><property name="viewName" value="file/regist"/></bean>
+ <bean id="file_registController" class="file.controller.RegistController"></bean>
+  <!-- 비즈몰 바로가기  -->
+ <bean id="asiana_controller" class="biz.controller.AsianaController"><property name="service"><ref bean="tgateService"/></property></bean>
+ <bean id="dongwon_controller" class="biz.controller.DongwonController"><property name="service"><ref bean="tgateService"/></property> </bean>
+ <bean id="gsretail_controller" class="biz.controller.GsretailController"><property name="service"><ref bean="tgateService"/></property></bean>
+ <bean id="hm_controller" class="biz.controller.HmController"><property name="service"><ref bean="tgateService"/></property></bean>
+ <bean id="hyundai_autoever_controller" class="biz.controller.Hyundai_autoeverController"><property name="service"><ref bean="tgateService"/></property></bean>
+ <bean id="kkpc_controller" class="biz.controller.KkpcController"><property name="service"><ref bean="tgateService"/></property></bean>
+ <bean id="lotte_controller" class="biz.controller.LotteController"><property name="service"><ref bean="tgateService"/></property></bean>
+ <bean id="shinhandata_controller" class="biz.controller.ShinhandataController"><property name="service"><ref bean="tgateService"/></property></bean>
+ <bean id="youlchon_controller" class="biz.controller.YoulchonController"><property name="service"><ref bean="tgateService"/></property></bean>
+ <bean id="adminService" class="admin.model.AdminServiceImpl"><property name="dao"><ref bean="adminDao"/></property></bean>
+ <bean id="customerService" class="customer.model.CustomerServiceImpl"><property name="dao"><ref bean="customerDao"/></property></bean>
+ <bean id="contractService" class="contract.model.ContractServiceImpl"><property name="dao"><ref bean="contractDao"/></property></bean>
+ <bean id="guestService" class="guest.model.GuestServiceImpl"> <property name="dao"><ref bean="guestDao"/></property></bean>
+ <bean id="mobileService" class="mobile.model.MobileServiceImpl"><property name="dao"><ref bean="mobileDao"/></property> </bean>
+ <bean id="promotionService" class="promotion.model.PromotionServiceImpl"><property name="dao"><ref bean="promotionDao"/></property></bean>
+ <bean id="tariffService" class="tariff.model.TariffServiceImpl"><property name="dao"><ref bean="tariffDao"/></property></bean>
+ <bean id="tgateService" class="tgate.model.TgateServiceImpl"><property name="dao"><ref bean="tgateDao"/></property></bean>
+ <bean id="agencyService" class="dtg.model.AgencyServiceImpl"><property name="dao"><ref bean="agencyDao"/></property></bean>
+ <bean id="adminDao" class="admin.model.AdminDaoImpl" autowire="byName"><property name="sqlMapClient"><ref bean="sqlMapClient"/></property></bean>
+ <bean id="customerDao" class="customer.model.CustomerDaoImpl" autowire="byName"><property name="sqlMapClient"><ref bean="sqlMapClient"/></property></bean>
+ <bean id="contractDao" class="contract.model.ContractDaoImpl" autowire="byName"><property name="sqlMapClient"><ref bean="sqlMapClient"/></property> </bean>
+ <bean id="guestDao" class="guest.model.GuestDaoImpl" autowire="byName"><property name="sqlMapClient"><ref bean="sqlMapClient"/></property></bean>
+ <bean id="mobileDao" class="mobile.model.MobileDaoImpl" autowire="byName"><property name="sqlMapClient"><ref bean="sqlMapClient"/></property> </bean>
+ <bean id="promotionDao" class="promotion.model.PromotionDaoImpl" autowire="byName"><property name="sqlMapClient"><ref bean="sqlMapClient"/></property></bean>
+ <bean id="tariffDao" class="tariff.model.TariffDaoImpl" autowire="byName"><property name="sqlMapClient"><ref bean="sqlMapClient"/></property></bean>
+ <bean id="tgateDao" class="tgate.model.TgateDaoImpl" autowire="byName"><property name="sqlMapClient"><ref bean="sqlMapClient"/></property></bean>
+ <bean id="agencyDao" class="dtg.model.AgencyDaoImpl" autowire="byName"><property name="sqlMapClient"><ref bean="sqlMapClient"/></property></bean>
+<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+ <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+ 	<property name="maxUploadSize">
+ 		<value>10000000</value>
+ 	</property>
+ 	<property name="uploadTempDir" ref="uploadDirResource"/>
+ 	</bean>
+ 	<bean id="uploadDirResource" class="org.springframework.core.io.FileSystemResource">
+	<constructor-arg>
+		<value>c:/</value>
+	</constructor-arg>
+ 	</bean>
+</beans>

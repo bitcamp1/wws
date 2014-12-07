@@ -1,0 +1,200 @@
+@CHARSET "UTF-8";@CHARSET "UTF-8";
+
+.dtg_gnb {height : 20px;width : 1170px;float:left;list-style-type: none;padding-left : 30px;background-color:#ddd;text-align:left;margin:0 0 50px;}
+.dtg_gnb li{ display : inline;font-weight: bold; font-size: 11px;padding : 0 35px ;margin: 0 auto;cursor:pointer;}
+.dtg_gnb li a{color:gray;}
+#dtg_gnb{width: 1200px;height: 20px;margin: 0 auto;border:1px solid gray;}
+#dtg_gnb_div{width: 1200px;margin:0 auto;}
+
+table.subtitle  { border-bottom:2px solid #0963A6; }
+td.subtitle_subject { width:230px; color:#366CB3; font-weight:bold; }
+td.subtitle_etc     {  }
+#dtg_gnb_div{width:1200px;margin:0 auto;}
+
+#content2 th{font-size: 12px;background-color: #ddd;width:1200px;height:20px;border:1px solid gray;}
+#subtitle{width:99%;margin:20px 0 10px 0;}
+#subtitle tr{height:20px;}
+#subtitle tr td.#subtitle{width:230px; valign:top;}
+table.tp_list1      { border:1px solid #DADADA; }
+table.tp_list1 tr   {  }
+table.tp_list1 th.listhead1 { text-align:center; padding:3px 0 0 0; font-weight:bold;  color:#505050; font-size: 11px;background:#ddd;}
+table.tp_list1 th.listhead0 { text-align:center; padding:3px 0 0 0; ; font-weight:bold;   color:#505050;  background:#ddd; }
+table.tp_list1 td.list1 { background:#FFFFFF; border-top:1px solid #DADADA; text-align:center; }
+table.tp_list1 td.list0 { background:#FFFFFF; border-top:1px solid #DADADA; text-align:center;}
+table.tp_list1 td.memo0 { border-top:1px solid #FFFFFF; border-left:1px solid #FFFFFF; border-right:1px solid #FFFFFF; border-bottom:1px solid #FFFFFF;color:#ffffff; background:#ddd; }
+.main_title{
+    height:130px;
+}
+#join_wrap {
+width: 95%;
+height: 95%;
+}
+#joinPage {
+    display : block;
+    position: relative;
+    width       : 100%;
+    height      : 100%;
+    margin : 0 auto;
+    overflow : hidden;
+}
+
+.joinMemberForm {
+    *border : 1px #FAFAFA solid;
+    display : block;
+    height : 40px;
+    width : 600px;
+    margin : 20px auto 10px auto; 
+}
+
+.joinMemberForm label {
+    *background-color : #FAFAFA;
+    *border : 1px blue solid;
+    display : inline-block;
+    float : left;
+    width : 140px;
+    text-align : right;
+    line-height : 40px;
+    *margin : 10px 0 10px 80px; 
+}
+
+
+#memberId.statusOk {
+    background-position : 200px, 0px;
+}
+
+.statusNo {
+    
+}
+
+.joinMemberInput {
+    border : 1px solid #D3D4D5;
+    display : block;
+    width : 250px;
+    height : 36px;
+    margin : 0 0 0 200px;
+    *outline : thin solid #D3D4D5;
+    padding-left : 15px;
+}
+
+#joinMemberContents input:focus {
+    *outline : thin solid #0995E0;
+    border : 1px solid #0995E0;
+}
+
+#joinMemberZipCode {
+    position : relative;
+    *border : 1px blue solid;
+    display : block;
+    *float : right;
+    width : 350px;
+    height : 36px;
+    *margin-top : -70px;
+    margin-left : 200px;
+}
+
+#joinMemberZipCode1 {
+    border : 1px #D3D4D5 solid;
+    float : left;
+}
+#joinMemberZipCode2 {
+    border : 1px #D3D4D5 solid;
+}
+
+#zipSearch {
+    position : relative;
+    border : 1px #D3D4D5 solid;
+    display : inline-block;
+    width : 70px;
+    height : 36px;
+    *top : 3px;
+    margin-left : 5px;
+    line-height : 36px;
+    text-align : center;
+    cursor : pointer;
+    background-color : #0995E0;
+    color : #FFF;
+    float :left;
+    margin-left:10px;
+}
+
+#zipSearch a {
+    color : #FFF;
+}
+
+#zipSearch a:hover {
+    color : #FFF;
+}
+
+#zipSearch a:visited {
+    color : #FFF;
+}
+
+#zipSearch a:active {
+    color : #FFF;
+}
+
+#joinMemberZipCode input {
+    width  : 170px;
+    height : 36px;
+    margin : 0 auto;
+    border : 1px solid #D3D4D5;
+    *outline : thin solid #D3D4D5;
+    padding-left : 15px;
+}
+
+#joinMemberContents {
+    *border: 1px red solid;
+    display: block;
+    width: 600px;
+    position: relative;
+    margin: 0 auto;
+}
+
+#joinMemberBottom {
+    *border: 1px red solid;
+    display: block;
+    width: 240px;
+    height : 75px;
+    margin: 10px auto 20px auto;
+}
+
+.joinMemberBtn {
+    border : 1px #D3D4D5 solid;
+    display : inline-block;
+    margin-top : 20px;
+    *padding-bottom : 20px;
+    width: 100px;
+    height : 36px;
+    line-height : 36px;
+    text-align : center;
+    cursor : pointer;
+    background-color : #0995E0;
+    color : #FFF;
+}
+
+#joinBtn {
+    margin-left : 32px;
+    
+}
+
+.confirmId {
+    *border : 1px red solid;
+    display : block;
+    position : relative;
+    top : -39px;
+    left : 475px;
+    width : 200px;
+    height : 36px;
+    line-height : 36px; 
+}
+
+.equalPwd {
+    *border : 1px red solid;
+    display : block;
+    position : relative;
+    top : -39px;
+    left : 475px;
+    width : 200px;
+    height : 36px;
+    line-height : 36px;
+}

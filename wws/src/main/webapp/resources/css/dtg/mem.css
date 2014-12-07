@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+    #mem_modi_tbl{width:990px;}
+    #mem_modi_tbl td{padding:10px;width:350px;}
+    #store{margin:0 20px 0 0;}
+    #btn_box{width:250px;margin:0 auto;}
+    #store , #reset{width:80px;height:30px;background-color: #0000CD; color:#fff;margin:0 auto;}
+    #store{margin: 0 60px 0 0;}
+    fieldset{width:400px;margin:0 auto;}
+    legend{font-weight: bold;}
+    label{width:150px;display:inline-block;}
+    fieldset input{width:200px;}
+    
+    #mem_regi_tbl{width:990px;}
+    #mem_regi_tbl td{padding:10px;width:350px;}

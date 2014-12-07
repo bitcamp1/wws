@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Image">
+	<typeAlias alias="ImageBean" type="image.model.ImageBean"/>
+	
+	
+	<!--selectAll은 의미없다-->
+	
+	<select id="selectLastInsertId" resultClass="int">
+		select last_insert_id() from image
+	</select>
+	
+	
+	<insert id="insert">
+			insert into image()values()
+		</insert>
+	
+	<update id="update" parameterClass="HashMap">
+		update image set 
+		img_name=#imgName#,
+		img_ext=#imgExt#
+		where img_idx=#imgIdx#
+	</update>
+	<!--삭제기능-->
+	
+</sqlMap>

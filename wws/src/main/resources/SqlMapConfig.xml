@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+    
+<sqlMapConfig>
+	<settings useStatementNamespaces="true"/>
+	
+	<transactionManager type="JDBC" commitRequired="false">
+   <dataSource type="SIMPLE">
+    <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/>
+    <property name="JDBC.ConnectionURL" value="jdbc:mysql://localhost/whitews?useUnicode=true&amp;characterEncoding=UTF8"/>
+    <property name="JDBC.Username" value="whitews"/>
+    <property name="JDBC.Password" value="wwss+1016"/>
+   </dataSource>  
+  </transactionManager>
+
+
+	<sqlMap resource="admin/model/Admin.xml"/>
+	<sqlMap resource="contract/model/Contract.xml"/>
+	<sqlMap resource="customer/model/Customer.xml"/>
+	<sqlMap resource="dtg/model/Agency.xml"/>
+	<sqlMap resource="guest/model/Guest.xml"/>
+	<sqlMap resource="image/model/Image.xml"/>
+	<sqlMap resource="mobile/model/Mobile.xml"/>
+	<sqlMap resource="promotion/model/Promotion.xml"/>
+	<sqlMap resource="tariff/model/Tariff.xml"/>
+	<sqlMap resource="tgate/model/Tgate.xml"/>
+	
+	
+</sqlMapConfig>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    <sqlMap namespace="Contract">
+    	<typeAlias alias="ContractBean" type="contract.model.ContractBean" />
+    	<resultMap id="ContractResult" class="ContractBean">
+    		<result property="ctrIdx" column="ctr_idx"/>
+    		<result property="joinType" column="join_type"/>
+    		<result property="joinFee" column="join_fee"/>
+    		<result property="usim" column="usim"/>
+    		<result property="installPrice" column="i_price"/>
+    		<result property="iMonth" column="i_month"/>
+    		<result property="joinNm" column="join_nm"/>
+    		<result property="rgstDate" column="rgst_date"/>
+    	</resultMap>
+    	<select id="selectAll" resultMap="ContractResult" parameterClass="java.util.HashMap">
+    		select * from contract 
+    		order by ctr_idx desc 
+    		limit #pageStartIdx#, #pageSize#
+    	</select>
+    	<select id="count" resultClass="int">
+    		select count(*) from contract
+    	</select>
+    	<insert id="insert" parameterClass="ContractBean">
+    		insert into contract(
+    			i_month
+    		)values(
+    			#iMonth#
+    		);
+    	</insert>
+    	<select id="selectByIdx" parameterClass="int" resultMap="ContractResult">
+    		select * from contract 
+    		where ctr_idx=#ctrIdx#
+    	</select>
+    	<update id="update" parameterClass="ContractBean">
+    		update contract set
+    			join_type=#joinType#, 
+    			join_fee=#joinFee#,
+    			usim=#usim#,
+    			i_price=#installPrice#,
+    			i_month=#iMonth#,
+    			join_nm=#joinNm#
+    			where ctr_idx=#ctrIdx#
+    	</update>
+    	<delete id="delete" parameterClass="int">
+    		delete from contract where ctr_idx=#ctrIdx#
+    	</delete>
+    </sqlMap>

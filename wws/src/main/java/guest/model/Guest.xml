@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Guest">
+	<typeAlias alias="GuestBean" type="guest.model.GuestBean"/>
+  	
+	<resultMap id="GuestResult" class="GuestBean">
+		<result property="gstIdx" column="gst_idx"/>
+		<result property="name" column="name"/>
+		<result property="phone" column="phone"/>
+		<result property="birth" column="birth"/>
+		<result property="gender" column="gender"/>
+		<result property="info" column="info"/>
+		<result property="provide" column="provide"/>
+		<result property="rgstDate" column="rgst_date"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="GuestResult">
+		select * from guest 
+		order by gst_idx desc
+		limit #pageStartIdx#, #pageSize#
+	</select>
+	<select id="count" resultClass="int">
+		select count(*) from guest
+	</select>
+	<insert id="insert" parameterClass="GuestBean" >
+		insert into guest ( 
+			name,
+			phone,
+			birth,
+			gender,
+			info,
+			provide
+			)
+		
+		values ( #name#, #phone#, #birth#, #gender#,#info#,#provide# );
+		
+	</insert>
+	<select id="selectByIdx" parameterClass="int" resultMap="GuestResult">
+		select * from guest where gst_idx=#gstIdx#
+	</select>
+	
+	
+	<select id="selectByName" parameterClass="String" resultMap="GuestResult">
+		select * from guest where upper(name) like '%' || upper(#name#) || '%'
+	</select>
+	
+	
+	<update id="update" parameterClass="GuestBean">
+		update guest set
+		name=#name#,
+		phone=#phone#,
+		birth=#birth#,
+		gender=#gender#,
+		info=#info#,
+		provide=#provide#
+		
+		where gst_idx=#gstIdx#
+	</update>
+	<delete id="delete" parameterClass="int">
+		delete from guest where gst_idx=#gstIdx#
+	</delete>
+	
+	
+</sqlMap>

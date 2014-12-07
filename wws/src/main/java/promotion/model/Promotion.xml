@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0/EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	<sqlMap namespace="Promotion">
+		<typeAlias alias="PromotionBean" type="promotion.model.PromotionBean"/>
+		<resultMap class="PromotionBean" id="PromotionResult">
+			<result property="promIdx" column="prom_idx"/>
+			<result property="title" column="title"/>
+			<result property="goods" column="goods"/>
+			<result property="message" column="message"/>
+			<result property="rgstDate" column="rgst_date"/>
+		</resultMap>
+		<select id="selectAll" resultMap="PromotionResult" parameterClass="java.util.HashMap">
+			select * from promotion  
+					 order by prom_idx desc
+					 limit #pageStartIdx#, #pageSize#
+		</select>
+		<select id="count" resultClass="int">
+			select count(*) from promotion
+		</select>
+		<insert id="insert" parameterClass="PromotionBean" >
+			insert into promotion (
+				title,
+				goods,
+				message
+				
+			) values (
+				#title#,
+				#goods#,
+				#message#
+			);
+		</insert>
+		<select resultMap="PromotionResult" id="selectByIdx" parameterClass="int">
+			select * from promotion 
+			where prom_idx = #promIdx#
+		</select>
+		<update id="update" parameterClass="PromotionBean">
+			update promotion set
+				title=#title#,
+				goods=#goods#,
+				message=#message#
+				where prom_idx=#promIdx#
+		</update>
+		<delete id="delete" parameterClass="int">
+			delete from promotion where prom_idx=#promIdx#
+		</delete>
+	</sqlMap> 
